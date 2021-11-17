@@ -30,6 +30,7 @@ app.messaging().getToken({ vapidKey: 'BGxx-fjPINkBky_OPMHnaEt5I-Nw6T4b-tyQC9BBoX
 const messaging = firebase.messaging();
 messaging.onBackgroundMessage((payload) => {
   console.log('[firebase-messaging-sw.js] Received background message ', payload);
+  try {
   // Customize notification here
   const notificationTitle = 'Background Message Title';
   const notificationOptions = {
@@ -39,4 +40,11 @@ messaging.onBackgroundMessage((payload) => {
 
   self.registration.showNotification(notificationTitle,
     notificationOptions);
+  
+   // self.registration.showNotification(notificationTitle);
+  }catch(err) {
+    console.log('sw-err', err);
+  }
+  
 });
+
